@@ -2,9 +2,17 @@ package com.example.claseanidadasyinternasuenum
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import java.io.PrintStream
 
 class MainActivity : AppCompatActivity() {
+    var etn_Valor1:EditText?=null
+    lateinit var etn_valor2:EditText
+    lateinit var tv_resultado:TextView
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -12,7 +20,14 @@ class MainActivity : AppCompatActivity() {
         //claseEnumeradas()
         //seguridadNula()
         //funciones()
-        clases()
+        //clases()
+        //clases anidadas (nested) y las clases interner (inner)
+        //claseAnidadayInterna()
+
+        etn_Valor1 = findViewById(R.id.etn_Valor1)
+        etn_valor2 = findViewById(R.id.etn_Valor2)
+        tv_resultado = findViewById(R.id.Resultado)
+
 
     }
 
@@ -128,6 +143,30 @@ class MainActivity : AppCompatActivity() {
 
         println("${persona2.amigo?.first()?.nombre} es amigo de ${persona2.nombre}")
 
+    }
+
+    private fun claseAnidadayInterna(){
+        val miClaseAnidad = MiClaseAnidadaInterna.miClaseAnidada()
+        val sumar = miClaseAnidad.suma(10,5)
+        println("El resultado de la suma es $sumar")
+
+        val miClaseInterna = MiClaseAnidadaInterna().miClaseInterna()
+        val sumarDos = miClaseInterna.sumarUno(10)
+        println("El resultado de sumar uno es $sumarDos")
+        val sumarTres = miClaseInterna.sumarUno(5)
+        println("El resultado de sumar uno es $sumarTres")
+    }
+
+    fun calcular(Vista:View){
+        val valor1_String = etn_Valor1?.text.toString()
+        val valor2_String = etn_valor2?.text.toString()
+
+        val valor1_Int = valor1_String.toInt()
+        val valor2_Int = Integer.parseInt(valor2_String)
+
+        val suma = valor1_Int + valor2_Int
+        val resultado = suma.toString()
+        tv_resultado.setText(resultado)
     }
 
 }
